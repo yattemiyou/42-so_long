@@ -1,31 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_game.c                                          :+:      :+:    :+:   */
+/*   ft_validation.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: anonymous <anonymous@student.42tokyo.jp    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/03 12:33:02 by anonymous         #+#    #+#             */
-/*   Updated: 2023/12/03 15:18:46 by anonymous        ###   ########.fr       */
+/*   Created: 2023/12/03 15:40:51 by anonymous         #+#    #+#             */
+/*   Updated: 2023/12/03 15:41:10 by anonymous        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	ft_game_initialize(t_game *game, const char *map_file)
+int	ft_validation_is_rectangular(t_game *game)
 {
-	ft_bzero(game, sizeof(t_game));
-	if (ft_map_read(game, map_file) == FALSE)
+	int	i;
+
+	if (game->height == 0)
 		return (FALSE);
-	if (ft_map_validate(game) == FALSE)
+	game->width = ft_strlen(game->map[0]);
+	if (game->width == 0)
+		return (FALSE);
+	i = 0;
+	while (i < game->height)
 	{
-		ft_putendl_fd(game->message, 1);
-		return (FALSE);
+		if (ft_strlen(game->map[i++]) != (size_t)game->width)
+			return (FALSE);
 	}
 	return (TRUE);
-}
-
-void	ft_game_finalize(t_game *game)
-{
-	ft_map_free(game);
 }

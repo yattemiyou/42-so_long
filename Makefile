@@ -8,6 +8,7 @@ SRCDIR = ./
 SRCS = main.c
 SRCS += ft_game.c
 SRCS += ft_map.c
+SRCS += ft_validation.c
 
 OBJS = $(addprefix $(SRCDIR),$(SRCS:%.c=%.o))
 
