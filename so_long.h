@@ -1,25 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: anonymous <anonymous@student.42tokyo.jp    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/03 12:39:08 by anonymous         #+#    #+#             */
-/*   Updated: 2023/12/03 14:06:34 by anonymous        ###   ########.fr       */
+/*   Created: 2023/12/02 14:42:49 by anonymous         #+#    #+#             */
+/*   Updated: 2023/12/03 12:46:13 by anonymous        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#ifndef SO_LONG_H
+# define SO_LONG_H
 
-int	main(int argc, char const *argv[])
+# include "get_next_line.h"
+# include "libft.h"
+
+typedef struct s_game
 {
-	t_game	game;
+	char	**map;
+	int		width;
+	int		height;
+	int		status;
+}	t_game;
 
-	if (argc != 2)
-		return (1);
-	if (ft_game_initialize(&game, argv[1]) == FALSE)
-		return (1);
-	ft_game_finalize(&game);
-	return (0);
-}
+int		ft_game_initialize(t_game *game, const char *map_file);
+void	ft_game_finalize(t_game *game);
+
+int		ft_map_read(t_game *game, const char *map_file);
+void	ft_map_free(t_game *game);
+
+#endif
