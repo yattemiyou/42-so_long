@@ -6,13 +6,13 @@
 /*   By: anonymous <anonymous@student.42tokyo.jp    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/03 15:40:51 by anonymous         #+#    #+#             */
-/*   Updated: 2023/12/17 09:51:09 by anonymous        ###   ########.fr       */
+/*   Updated: 2023/12/17 18:12:41 by anonymous        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	ft_validation_is_rectangular(t_game *game)
+static void	is_rectangular(t_game *game)
 {
 	size_t	i;
 
@@ -29,7 +29,7 @@ void	ft_validation_is_rectangular(t_game *game)
 	}
 }
 
-void	ft_validation_is_surrounded(t_game *game)
+static void	is_surrounded(t_game *game)
 {
 	size_t	i;
 
@@ -51,4 +51,16 @@ void	ft_validation_is_surrounded(t_game *game)
 			ft_game_finalize(game, "壁で囲まれていません。");
 		i++;
 	}
+}
+
+void	ft_validation_is_valid_map(t_game *game)
+{
+	is_rectangular(game);
+	is_surrounded(game);
+	if (game->collectible == 0)
+		ft_game_finalize(game, "経由地が存在しません。");
+	if (game->exit.valid == FALSE)
+		ft_game_finalize(game, "出口が存在しません。");
+	if (game->player.valid == FALSE)
+		ft_game_finalize(game, "プレイヤーが存在しません。");
 }
