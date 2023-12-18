@@ -6,7 +6,7 @@
 /*   By: anonymous <anonymous@student.42tokyo.jp    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/03 15:40:51 by anonymous         #+#    #+#             */
-/*   Updated: 2023/12/19 07:04:07 by anonymous        ###   ########.fr       */
+/*   Updated: 2023/12/19 07:10:33 by anonymous        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,13 +94,13 @@ void	ft_validation_is_valid_map(t_game *game)
 		ft_game_finalize(game, "プレイヤーが存在しません。");
 	map = ft_util_copy_map(game);
 	collectible = game->collectible;
-	result[0] = (game->collectible == 0);
-	result[1] = is_reachable(game, game->player.i, game->player.j);
+	result[0] = is_reachable(game, game->player.i, game->player.j);
+	result[1] = (game->collectible == 0);
 	ft_map_free(&game->map);
 	game->map = map;
 	game->collectible = collectible;
-	if (result[0] == FALSE)
-		ft_game_finalize(game, "すべての経由地に到達できません。");
 	if (result[1] == FALSE)
+		ft_game_finalize(game, "すべての経由地に到達できません。");
+	if (result[0] == FALSE)
 		ft_game_finalize(game, "ゴールに到達できません。");
 }
