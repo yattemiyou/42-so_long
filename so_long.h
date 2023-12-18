@@ -6,7 +6,7 @@
 /*   By: anonymous <anonymous@student.42tokyo.jp    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 14:42:49 by anonymous         #+#    #+#             */
-/*   Updated: 2023/12/18 21:24:11 by anonymous        ###   ########.fr       */
+/*   Updated: 2023/12/18 22:03:18 by anonymous        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	ft_game_initialize(t_game *game, const char *map_file);
 void	ft_game_finalize(t_game *game, char *error);
 
 void	ft_map_read(t_game *game, const char *map_file);
-void	ft_map_free(t_game *game);
+void	ft_map_free(char ***map);
 
 char	**ft_util_copy_map(t_game *game);
 void	ft_util_print_map(char **map);

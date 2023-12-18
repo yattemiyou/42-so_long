@@ -6,7 +6,7 @@
 /*   By: anonymous <anonymous@student.42tokyo.jp    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/03 12:33:02 by anonymous         #+#    #+#             */
-/*   Updated: 2023/12/17 18:06:53 by anonymous        ###   ########.fr       */
+/*   Updated: 2023/12/19 06:52:08 by anonymous        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	ft_game_initialize(t_game *game, const char *map_file)
 
 void	ft_game_finalize(t_game *game, char *error)
 {
-	ft_map_free(game);
+	ft_map_free(&game->map);
 	if (error == NULL)
 		exit(0);
 	ft_putendl_fd("Error", STDERR_FILENO);

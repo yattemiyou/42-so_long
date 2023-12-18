@@ -6,7 +6,7 @@
 /*   By: anonymous <anonymous@student.42tokyo.jp    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/03 15:40:51 by anonymous         #+#    #+#             */
-/*   Updated: 2023/12/18 20:25:03 by anonymous        ###   ########.fr       */
+/*   Updated: 2023/12/19 07:04:07 by anonymous        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,10 @@ static int	is_reachable(t_game *game, size_t i, size_t j)
 
 void	ft_validation_is_valid_map(t_game *game)
 {
+	char	**map;
+	size_t	collectible;
+	int		result[2];
+
 	is_rectangular(game);
 	is_surrounded(game);
 	if (game->collectible == 0)
@@ -88,8 +92,15 @@ void	ft_validation_is_valid_map(t_game *game)
 		ft_game_finalize(game, "出口が存在しません。");
 	if (game->player.valid == FALSE)
 		ft_game_finalize(game, "プレイヤーが存在しません。");
-	if (is_reachable(game, game->player.i, game->player.j) == FALSE)
-		ft_game_finalize(game, "ゴールに到達できません。");
-	if (game->collectible > 0)
+	map = ft_util_copy_map(game);
+	collectible = game->collectible;
+	result[0] = (game->collectible == 0);
+	result[1] = is_reachable(game, game->player.i, game->player.j);
+	ft_map_free(&game->map);
+	game->map = map;
+	game->collectible = collectible;
+	if (result[0] == FALSE)
 		ft_game_finalize(game, "すべての経由地に到達できません。");
+	if (result[1] == FALSE)
+		ft_game_finalize(game, "ゴールに到達できません。");
 }

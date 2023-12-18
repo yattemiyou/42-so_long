@@ -6,7 +6,7 @@
 /*   By: anonymous <anonymous@student.42tokyo.jp    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/03 12:36:24 by anonymous         #+#    #+#             */
-/*   Updated: 2023/12/18 06:05:16 by anonymous        ###   ########.fr       */
+/*   Updated: 2023/12/19 06:53:21 by anonymous        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,15 +104,15 @@ void	ft_map_read(t_game *game, const char *map_file)
 	close(fd);
 }
 
-void	ft_map_free(t_game *game)
+void	ft_map_free(char ***map)
 {
 	char	**ptr;
 
-	if (game->map == NULL)
+	if (*map == NULL)
 		return ;
-	ptr = game->map;
+	ptr = *map;
 	while (*ptr)
 		free(*ptr++);
-	free(game->map);
-	game->map = NULL;
+	free(*map);
+	*map = NULL;
 }

@@ -6,7 +6,7 @@
 /*   By: anonymous <anonymous@student.42tokyo.jp    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 21:05:47 by anonymous         #+#    #+#             */
-/*   Updated: 2023/12/18 21:23:49 by anonymous        ###   ########.fr       */
+/*   Updated: 2023/12/19 06:55:14 by anonymous        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,11 @@ char	**ft_util_copy_map(t_game *game)
 	while (*src)
 	{
 		s = ft_strdup(*src++);
+		if (s == NULL)
+		{
+			ft_map_free(&new_map);
+			ft_game_finalize(game, "地図データのメモリ確保に失敗しました。");
+		}
 		*dest++ = s;
 	}
 	return (new_map);
