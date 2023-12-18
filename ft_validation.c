@@ -6,7 +6,7 @@
 /*   By: anonymous <anonymous@student.42tokyo.jp    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/03 15:40:51 by anonymous         #+#    #+#             */
-/*   Updated: 2023/12/17 18:12:41 by anonymous        ###   ########.fr       */
+/*   Updated: 2023/12/18 20:25:03 by anonymous        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,31 @@ static void	is_surrounded(t_game *game)
 	}
 }
 
+static int	is_reachable(t_game *game, size_t i, size_t j)
+{
+	int	up;
+	int	down;
+	int	left;
+	int	right;
+
+	if ((i >= game->height) || (j >= game->width))
+		return (FALSE);
+	if (game->map[i][j] == 'X')
+		return (FALSE);
+	if (game->map[i][j] == '1')
+		return (FALSE);
+	if (game->map[i][j] == 'C')
+		game->collectible--;
+	if (game->map[i][j] == 'E')
+		return (TRUE);
+	game->map[i][j] = 'X';
+	up = is_reachable(game, i - 1, j);
+	down = is_reachable(game, i + 1, j);
+	left = is_reachable(game, i, j - 1);
+	right = is_reachable(game, i, j + 1);
+	return (up || down || left || right);
+}
+
 void	ft_validation_is_valid_map(t_game *game)
 {
 	is_rectangular(game);
@@ -63,4 +88,8 @@ void	ft_validation_is_valid_map(t_game *game)
 		ft_game_finalize(game, "出口が存在しません。");
 	if (game->player.valid == FALSE)
 		ft_game_finalize(game, "プレイヤーが存在しません。");
+	if (is_reachable(game, game->player.i, game->player.j) == FALSE)
+		ft_game_finalize(game, "ゴールに到達できません。");
+	if (game->collectible > 0)
+		ft_game_finalize(game, "すべての経由地に到達できません。");
 }
