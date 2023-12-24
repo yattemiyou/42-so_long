@@ -6,7 +6,7 @@
 /*   By: anonymous <anonymous@student.42tokyo.jp    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/03 15:40:51 by anonymous         #+#    #+#             */
-/*   Updated: 2023/12/19 07:10:33 by anonymous        ###   ########.fr       */
+/*   Updated: 2023/12/24 13:06:34 by anonymous        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ void	ft_validation_is_valid_map(t_game *game)
 	is_surrounded(game);
 	if (game->collectible == 0)
 		ft_game_finalize(game, "経由地が存在しません。");
-	if (game->exit.valid == FALSE)
+	if (game->exit == 0)
 		ft_game_finalize(game, "出口が存在しません。");
 	if (game->player.valid == FALSE)
 		ft_game_finalize(game, "プレイヤーが存在しません。");

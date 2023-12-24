@@ -6,7 +6,7 @@
 /*   By: anonymous <anonymous@student.42tokyo.jp    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/03 12:33:02 by anonymous         #+#    #+#             */
-/*   Updated: 2023/12/19 06:52:08 by anonymous        ###   ########.fr       */
+/*   Updated: 2023/12/24 13:21:00 by anonymous        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,13 @@ void	ft_game_initialize(t_game *game, const char *map_file)
 		ft_game_finalize(game, "ファイル名が不正です。");
 	ft_map_read(game, map_file);
 	ft_validation_is_valid_map(game);
+	ft_graphic_initialize(game, map_file);
 }
 
 void	ft_game_finalize(t_game *game, char *error)
 {
 	ft_map_free(&game->map);
+	ft_graphic_finalize(game);
 	if (error == NULL)
 		exit(0);
 	ft_putendl_fd("Error", STDERR_FILENO);

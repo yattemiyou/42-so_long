@@ -6,7 +6,7 @@
 /*   By: anonymous <anonymous@student.42tokyo.jp    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/03 12:36:24 by anonymous         #+#    #+#             */
-/*   Updated: 2023/12/19 06:53:21 by anonymous        ###   ########.fr       */
+/*   Updated: 2023/12/24 13:19:02 by anonymous        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,8 @@ static void	set_components(t_game *game, char c)
 		game->collectible++;
 	else if (c == 'E')
 	{
-		if (game->exit.valid)
+		if (++game->exit > 1)
 			ft_game_finalize(game, "出口が複数存在します。");
-		else
-			set_pos(&game->exit, game->height, game->width);
 	}
 	else if (c == 'P')
 	{
