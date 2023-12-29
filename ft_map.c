@@ -6,7 +6,7 @@
 /*   By: anonymous <anonymous@student.42tokyo.jp    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/03 12:36:24 by anonymous         #+#    #+#             */
-/*   Updated: 2023/12/24 13:19:02 by anonymous        ###   ########.fr       */
+/*   Updated: 2023/12/29 11:42:16 by anonymous        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ static void	check_characters(t_game *game, const char *map_file)
 void	ft_map_read(t_game *game, const char *map_file)
 {
 	int		fd;
-	char	**row;
+	size_t	h;
 	char	*line;
 	size_t	len;
 
@@ -89,17 +89,19 @@ void	ft_map_read(t_game *game, const char *map_file)
 	fd = open(map_file, O_RDONLY);
 	if (fd == -1)
 		ft_game_finalize(game, "地図ファイルがオープンできませんでした。");
-	row = game->map;
+	h = 0;
 	line = get_next_line(fd);
 	while (line != NULL)
 	{
 		len = ft_strlen(line);
 		if (line[len - 1] == '\n')
 			line[len - 1] = '\0';
-		*row++ = line;
+		game->map[h++] = line;
 		line = get_next_line(fd);
 	}
 	close(fd);
+	if (h != game->height)
+		ft_game_finalize(game, "地図データの読み込み中にエラーが発生しました。");
 }
 
 void	ft_map_free(char ***map)
