@@ -6,7 +6,7 @@
 /*   By: anonymous <anonymous@student.42tokyo.jp    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 06:46:52 by anonymous         #+#    #+#             */
-/*   Updated: 2023/12/29 09:11:19 by anonymous        ###   ########.fr       */
+/*   Updated: 2023/12/29 14:45:44 by anonymous        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,15 +51,15 @@ void	ft_graphic_initialize(t_game *game, const char *map_file)
 	x = game->width * PIXEL;
 	y = game->height * PIXEL;
 	game->win = mlx_new_window(game->mlx, x, y, (char *)map_file);
-	to_image(game, &game->empty, "./images/empty.xpm");
-	to_image(game, &game->dot, "./images/dot.xpm");
-	to_image(game, &game->wall, "./images/wall.xpm");
-	to_image(game, &game->power, "./images/power.xpm");
-	to_image(game, &game->goal, "./images/exit.xpm");
-	to_image(game, &game->pacman[UP], "./images/up.xpm");
-	to_image(game, &game->pacman[DOWN], "./images/down.xpm");
-	to_image(game, &game->pacman[LEFT], "./images/left.xpm");
-	to_image(game, &game->pacman[RIGHT], "./images/right.xpm");
+	to_image(game, &game->empty, "./textures/empty.xpm");
+	to_image(game, &game->dot, "./textures/dot.xpm");
+	to_image(game, &game->wall, "./textures/wall.xpm");
+	to_image(game, &game->power, "./textures/power.xpm");
+	to_image(game, &game->goal, "./textures/exit.xpm");
+	to_image(game, &game->pacman[UP], "./textures/up.xpm");
+	to_image(game, &game->pacman[DOWN], "./textures/down.xpm");
+	to_image(game, &game->pacman[LEFT], "./textures/left.xpm");
+	to_image(game, &game->pacman[RIGHT], "./textures/right.xpm");
 	display_characters(game);
 }
 
