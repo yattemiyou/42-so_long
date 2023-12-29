@@ -6,7 +6,7 @@
 /*   By: anonymous <anonymous@student.42tokyo.jp    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/03 12:39:08 by anonymous         #+#    #+#             */
-/*   Updated: 2023/12/24 12:37:13 by anonymous        ###   ########.fr       */
+/*   Updated: 2023/12/29 14:15:31 by anonymous        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,3 +23,9 @@ int	main(int argc, char const *argv[])
 	mlx_loop(game.mlx);
 	ft_game_finalize(&game, NULL);
 }
+
+// #include <libc.h>
+// __attribute__((destructor))
+// static void destructor() {
+// 	system("leaks -q push_swap");
+// }
