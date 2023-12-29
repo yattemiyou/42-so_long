@@ -6,7 +6,7 @@
 /*   By: anonymous <anonymous@student.42tokyo.jp    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/03 12:33:02 by anonymous         #+#    #+#             */
-/*   Updated: 2023/12/24 14:58:30 by anonymous        ###   ########.fr       */
+/*   Updated: 2023/12/29 11:14:31 by anonymous        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,16 @@ void	ft_game_initialize(t_game *game, const char *map_file)
 	ft_validation_is_valid_map(game);
 	ft_graphic_initialize(game, map_file);
 	ft_event_initialize(game);
+}
+
+void	ft_game_is_game_over(t_game *game)
+{
+	if (game->map[game->player.i][game->player.j] != 'E')
+		return ;
+	if (game->collectible > 0)
+		return ;
+	ft_putendl_fd("Congratulation!", STDOUT_FILENO);
+	ft_game_finalize(game, NULL);
 }
 
 void	ft_game_finalize(t_game *game, char *error)

@@ -6,7 +6,7 @@
 /*   By: anonymous <anonymous@student.42tokyo.jp    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 06:14:10 by anonymous         #+#    #+#             */
-/*   Updated: 2023/12/27 22:11:42 by anonymous        ###   ########.fr       */
+/*   Updated: 2023/12/29 11:21:53 by anonymous        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ static void	move_player(t_game *game, int x, int y, t_direction d)
 	ft_graphic_put_image(game, 'P', game->player, d);
 	ft_putnbr_fd(++number_of_movements, 1);
 	ft_putendl_fd("", 1);
+	ft_game_is_game_over(game);
 }
 
 static	int	key_hook(int keycode, void *param)
@@ -56,7 +57,36 @@ static	int	key_hook(int keycode, void *param)
 	return (0);
 }
 
+static int	mouse_hook(int button, int x, int y, void *param)
+{
+	t_game	*game;
+
+	(void)x;
+	(void)y;
+	game = (t_game *)param;
+	if (button == 4)
+		key_hook('q', game);
+	else if (button == 5)
+		key_hook('z', game);
+	else if (button == 1)
+		key_hook('s', game);
+	else if (button == 3)
+		key_hook('d', game);
+	return (0);
+}
+
+static int	game_over(void *param)
+{
+	t_game	*game;
+
+	game = (t_game *)param;
+	ft_game_finalize(game, NULL);
+	return (0);
+}
+
 void	ft_event_initialize(t_game *game)
 {
+	mlx_hook(game->win, 17, 0, game_over, game);
 	mlx_key_hook(game->win, key_hook, game);
+	mlx_mouse_hook(game->win, mouse_hook, game);
 }

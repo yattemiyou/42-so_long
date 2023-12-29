@@ -6,7 +6,7 @@
 /*   By: anonymous <anonymous@student.42tokyo.jp    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 14:42:49 by anonymous         #+#    #+#             */
-/*   Updated: 2023/12/27 22:08:32 by anonymous        ###   ########.fr       */
+/*   Updated: 2023/12/29 11:15:10 by anonymous        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ typedef struct s_game
 void	ft_event_initialize(t_game *game);
 
 void	ft_game_initialize(t_game *game, const char *map_file);
+void	ft_game_is_game_over(t_game *game);
 void	ft_game_finalize(t_game *game, char *error);
 
 void	ft_graphic_initialize(t_game *game, const char *map_file);
