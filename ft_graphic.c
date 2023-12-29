@@ -6,7 +6,7 @@
 /*   By: anonymous <anonymous@student.42tokyo.jp    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 06:46:52 by anonymous         #+#    #+#             */
-/*   Updated: 2023/12/24 13:22:09 by anonymous        ###   ########.fr       */
+/*   Updated: 2023/12/29 09:11:19 by anonymous        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,37 +21,23 @@ static void	to_image(t_game *game, void **ptr, char *path)
 		ft_game_finalize(game, "イメージファイルの読み込みに失敗しました。");
 }
 
-static void	put_image(t_game *game, void *ptr, int i, int j)
+static void	display_characters(t_game *game)
 {
-	mlx_put_image_to_window(game->mlx, game->win, ptr, j * PIXEL, i * PIXEL);
-}
+	t_pos	pos;
 
-static void	display_images(t_game *game)
-{
-	size_t	i;
-	size_t	j;
-
-	i = 0;
-	while (i < game->height)
+	game->map[game->player.i][game->player.j] = 'X';
+	pos.i = 0;
+	while (pos.i < game->height)
 	{
-		j = 0;
-		while (j < game->width)
+		pos.j = 0;
+		while (pos.j < game->width)
 		{
-			if (game->map[i][j] == '0')
-				put_image(game, game->empty, i, j);
-			else if (game->map[i][j] == '1')
-				put_image(game, game->wall, i, j);
-			else if (game->map[i][j] == 'C')
-				put_image(game, game->power, i, j);
-			else if (game->map[i][j] == 'E')
-				put_image(game, game->goal, i, j);
-			else if (game->map[i][j] == 'P')
-				game->map[i][j] = '0';
-			j++;
+			ft_graphic_put_image(game, game->map[pos.i][pos.j], pos, NONE);
+			pos.j++;
 		}
-		i++;
+		pos.i++;
 	}
-	put_image(game, game->pacman[UP], game->player.i, game->player.j);
+	ft_graphic_put_image(game, 'P', game->player, RIGHT);
 }
 
 void	ft_graphic_initialize(t_game *game, const char *map_file)
@@ -65,18 +51,61 @@ void	ft_graphic_initialize(t_game *game, const char *map_file)
 	x = game->width * PIXEL;
 	y = game->height * PIXEL;
 	game->win = mlx_new_window(game->mlx, x, y, (char *)map_file);
-	to_image(game, &game->empty, "./images/floor.xpm");
-	to_image(game, &game->wall, "./images/tree.xpm");
-	to_image(game, &game->power, "./images/potion.xpm");
-	to_image(game, &game->goal, "./images/portal.xpm");
-	to_image(game, &game->pacman[UP], "./images/D1.xpm");
-	display_images(game);
+	to_image(game, &game->empty, "./images/empty.xpm");
+	to_image(game, &game->dot, "./images/dot.xpm");
+	to_image(game, &game->wall, "./images/wall.xpm");
+	to_image(game, &game->power, "./images/power.xpm");
+	to_image(game, &game->goal, "./images/exit.xpm");
+	to_image(game, &game->pacman[UP], "./images/up.xpm");
+	to_image(game, &game->pacman[DOWN], "./images/down.xpm");
+	to_image(game, &game->pacman[LEFT], "./images/left.xpm");
+	to_image(game, &game->pacman[RIGHT], "./images/right.xpm");
+	display_characters(game);
+}
+
+void	ft_graphic_put_image(t_game *game, char c, t_pos pos, t_direction d)
+{
+	void	*img;
+	int		x;
+	int		y;
+
+	if (c == '0')
+		img = game->dot;
+	if (c == 'X')
+		img = game->empty;
+	else if (c == '1')
+		img = game->wall;
+	else if (c == 'C')
+		img = game->power;
+	else if (c == 'E')
+		img = game->goal;
+	else if (c == 'P')
+		img = game->pacman[d];
+	x = pos.j * PIXEL;
+	y = pos.i * PIXEL;
+	mlx_put_image_to_window(game->mlx, game->win, img, x, y);
 }
 
 void	ft_graphic_finalize(t_game *game)
 {
-	if (game->empty != NULL)
-		mlx_destroy_image(game->mlx, game->empty);
 	if (game->mlx != NULL)
 		mlx_destroy_window(game->mlx, game->win);
+	if (game->empty != NULL)
+		mlx_destroy_image(game->mlx, game->empty);
+	if (game->dot != NULL)
+		mlx_destroy_image(game->mlx, game->dot);
+	if (game->wall != NULL)
+		mlx_destroy_image(game->mlx, game->wall);
+	if (game->power != NULL)
+		mlx_destroy_image(game->mlx, game->power);
+	if (game->goal != NULL)
+		mlx_destroy_image(game->mlx, game->goal);
+	if (game->pacman[UP] != NULL)
+		mlx_destroy_image(game->mlx, game->pacman[UP]);
+	if (game->pacman[DOWN] != NULL)
+		mlx_destroy_image(game->mlx, game->pacman[DOWN]);
+	if (game->pacman[LEFT] != NULL)
+		mlx_destroy_image(game->mlx, game->pacman[LEFT]);
+	if (game->pacman[RIGHT] != NULL)
+		mlx_destroy_image(game->mlx, game->pacman[RIGHT]);
 }
