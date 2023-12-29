@@ -6,7 +6,7 @@
 /*   By: anonymous <anonymous@student.42tokyo.jp    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 06:14:10 by anonymous         #+#    #+#             */
-/*   Updated: 2023/12/29 18:24:17 by anonymous        ###   ########.fr       */
+/*   Updated: 2023/12/29 18:38:12 by anonymous        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,13 +65,13 @@ static int	mouse_hook(int button, int x, int y, void *param)
 	(void)y;
 	game = (t_game *)param;
 	if (button == M_UP)
-		key_hook('w', game);
+		key_hook(K_W, game);
 	else if (button == M_DOWN)
-		key_hook('s', game);
+		key_hook(K_S, game);
 	else if (button == M_LEFT)
-		key_hook('a', game);
+		key_hook(K_A, game);
 	else if (button == M_RIGHT)
-		key_hook('d', game);
+		key_hook(K_D, game);
 	return (0);
 }
 
