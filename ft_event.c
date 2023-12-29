@@ -6,7 +6,7 @@
 /*   By: anonymous <anonymous@student.42tokyo.jp    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 06:14:10 by anonymous         #+#    #+#             */
-/*   Updated: 2023/12/29 11:21:53 by anonymous        ###   ########.fr       */
+/*   Updated: 2023/12/29 18:09:02 by anonymous        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,11 +46,11 @@ static	int	key_hook(int keycode, void *param)
 	game = (t_game *)param;
 	if (c == 0x1b)
 		ft_game_finalize(game, NULL);
-	else if ((c == 'w' || c == 'q') && game->player.i > 0)
+	else if ((c == 'w') && game->player.i > 0)
 		move_player(game, 0, -1, UP);
-	else if ((c == 'a' || c == 'z') && game->player.i < game->height - 1)
+	else if ((c == 's') && game->player.i < game->height - 1)
 		move_player(game, 0, 1, DOWN);
-	else if (c == 's' && game->player.j > 0)
+	else if (c == 'a' && game->player.j > 0)
 		move_player(game, -1, 0, LEFT);
 	else if (c == 'd' && game->player.j < game->width - 1)
 		move_player(game, 1, 0, RIGHT);
@@ -64,13 +64,13 @@ static int	mouse_hook(int button, int x, int y, void *param)
 	(void)x;
 	(void)y;
 	game = (t_game *)param;
-	if (button == 4)
-		key_hook('q', game);
-	else if (button == 5)
-		key_hook('z', game);
-	else if (button == 1)
+	if (button == M_UP)
+		key_hook('w', game);
+	else if (button == M_DOWN)
 		key_hook('s', game);
-	else if (button == 3)
+	else if (button == M_LEFT)
+		key_hook('a', game);
+	else if (button == M_RIGHT)
 		key_hook('d', game);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: anonymous <anonymous@student.42tokyo.jp    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 14:42:49 by anonymous         #+#    #+#             */
-/*   Updated: 2023/12/29 11:15:10 by anonymous        ###   ########.fr       */
+/*   Updated: 2023/12/29 18:02:17 by anonymous        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,18 @@
 # include "libft.h"
 
 # define PIXEL 32
+
+# ifdef __linux__
+#  define M_UP 4
+#  define M_DOWN 5
+#  define M_LEFT 1
+#  define M_RIGHT 3
+# else
+#  define M_UP 5
+#  define M_DOWN 4
+#  define M_LEFT 1
+#  define M_RIGHT 2
+# endif
 
 typedef enum e_direction
 {
