@@ -6,7 +6,7 @@
 /*   By: anonymous <anonymous@student.42tokyo.jp    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 14:42:49 by anonymous         #+#    #+#             */
-/*   Updated: 2023/12/29 18:34:42 by anonymous        ###   ########.fr       */
+/*   Updated: 2023/12/29 19:08:27 by anonymous        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 # include "get_next_line.h"
 # include "libft.h"
 
+# define MAX_WIDTH 50
+# define MAX_HEIGHT 25
 # define PIXEL 32
 
 # ifdef __linux__

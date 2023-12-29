@@ -6,7 +6,7 @@
 /*   By: anonymous <anonymous@student.42tokyo.jp    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/03 12:33:02 by anonymous         #+#    #+#             */
-/*   Updated: 2023/12/29 11:14:31 by anonymous        ###   ########.fr       */
+/*   Updated: 2023/12/29 19:10:05 by anonymous        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ void	ft_game_initialize(t_game *game, const char *map_file)
 	if (ft_strncmp(ptr, EXT, ft_strlen(EXT)) != 0)
 		ft_game_finalize(game, "ファイル名が不正です。");
 	ft_map_read(game, map_file);
+	if (game->width > MAX_WIDTH || game->height > MAX_HEIGHT)
+		ft_game_finalize(game, "上限を超えています。");
 	ft_validation_is_valid_map(game);
 	ft_graphic_initialize(game, map_file);
 	ft_event_initialize(game);
