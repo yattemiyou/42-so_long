@@ -6,7 +6,7 @@
 /*   By: anonymous <anonymous@student.42tokyo.jp    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 06:14:10 by anonymous         #+#    #+#             */
-/*   Updated: 2023/12/29 18:09:02 by anonymous        ###   ########.fr       */
+/*   Updated: 2023/12/29 18:24:17 by anonymous        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,15 +44,15 @@ static	int	key_hook(int keycode, void *param)
 
 	c = (char)keycode;
 	game = (t_game *)param;
-	if (c == 0x1b)
+	if (c == K_ESC)
 		ft_game_finalize(game, NULL);
-	else if ((c == 'w') && game->player.i > 0)
+	else if ((c == K_W) && game->player.i > 0)
 		move_player(game, 0, -1, UP);
-	else if ((c == 's') && game->player.i < game->height - 1)
+	else if ((c == K_S) && game->player.i < game->height - 1)
 		move_player(game, 0, 1, DOWN);
-	else if (c == 'a' && game->player.j > 0)
+	else if (c == K_A && game->player.j > 0)
 		move_player(game, -1, 0, LEFT);
-	else if (c == 'd' && game->player.j < game->width - 1)
+	else if (c == K_D && game->player.j < game->width - 1)
 		move_player(game, 1, 0, RIGHT);
 	return (0);
 }
